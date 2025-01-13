@@ -1,0 +1,12 @@
+FROM rockylinux/rockylinux:latest
+
+LABEL maintainer="Ryuden <master+passmark@ryuden.org>"
+
+RUN yum update -y \
+    && yum install curl -y \
+    && curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.rpm.sh | bash \
+    && yum install speedtest -y
+
+WORKDIR /
+
+ENTRYPOINT echo YES | speedtest
